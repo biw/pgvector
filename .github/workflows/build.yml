@@ -70,3 +70,10 @@ jobs:
           nmake /NOLOGO /F Makefile.win clean && ^
           nmake /NOLOGO /F Makefile.win uninstall
         shell: cmd
+      - uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "*.exe"
+          tags: true
+          draft: true

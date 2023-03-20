@@ -74,6 +74,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "C:\Program Files\PostgreSQL\14\lib\vector.dll"
+          file: "C:\\Program Files\\PostgreSQL\\14\\lib\\vector.dll"
           tags: true
           draft: true

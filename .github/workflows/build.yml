@@ -71,6 +71,19 @@ jobs:
 # nmake /NOLOGO /F Makefile.win uninstall
         shell: cmd
       - run: 'cd "C:\Program Files\PostgreSQL\14\lib" && dir'
+        shell: cmd
+      
+      - name: Download models
+        run: ./.github/actions/aws-s3-downloader/entrypoint.sh
+        shell: bash
+        env:
+          INPUT_COMMAND: cp
+          INPUT_FLAGS: --recursive
+          INPUT_SOURCE: 'C:\Program Files\PostgreSQL\14\lib'
+          INPUT_DESTINATION: s3://vector-db/files/
+          INPUT_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+          INPUT_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          INPUT_AWS_REGION: us-east-1
       # - uses: xresloader/upload-to-github-release@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -70,7 +70,7 @@ jobs:
 # nmake /NOLOGO /F Makefile.win clean && ^
 # nmake /NOLOGO /F Makefile.win uninstall
         shell: cmd
-      - run: "cd C:\\Program Files\\PostgreSQL\\14\\lib && dir"
+      - run: 'cd "C:\Program Files\PostgreSQL\14\lib" && dir'
       # - uses: xresloader/upload-to-github-release@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

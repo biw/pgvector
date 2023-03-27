@@ -1,0 +1,49 @@
+name: 'AWS S3 Github Action - win/mac'
+description: 'This action allows you to use commands similar to AWS S3 CLI.'
+author: 'biw'
+branding:
+  icon: 'upload-cloud'
+  color: 'red'
+inputs:
+  command:
+    description: "The command that will be performed. More info: https://docs.aws.amazon.com/cli/latest/reference/s3/#available-commands"
+    required: false
+  source:
+    description: "The file path that the file will be sourced from. This can be either a local file or S3 file. The S3 file should lead with s3://."
+    required: true
+  destination:
+    description: "The file path that the file will be place. This can be either a local file or S3 file. The S3 file should lead with s3://."
+    required: false
+  aws_access_key_id:
+    description: "The AWS access key part of your credentials. More info: https://docs.aws.amazon.com/cli/latest/reference/configure/"
+    required: false
+  aws_secret_access_key:
+    description: "The AWS access key part of your credentials. More info: https://docs.aws.amazon.com/cli/latest/reference/configure/"
+    required: false
+  aws_session_token:
+    description: "The AWS access key part of your credentials. More info: https://docs.aws.amazon.com/cli/latest/reference/configure/"
+    required: false
+  aws_region:
+    description: "This is the region of the bucket. S3 namespace is global but the bucket is regional."
+    required: false
+  metadata_service_timeout:
+    description: "The number of seconds to wait until the metadata service request times out. More info: https://docs.aws.amazon.com/cli/latest/reference/configure/"
+    required: false
+  flags:
+    description: "Additional query flags."
+    required: false
+runs:
+  using: "composite"
+  steps:
+    - run: ./.github/actions/aws-s3-downloader/entrypoint.sh
+      shell: bash
+      with:
+        command: ${{ inputs.command }}
+        source: ${{ inputs.source }}
+        destination: ${{ inputs.destination }}
+        aws_access_key_id: ${{ inputs.aws_access_key_id }}
+        aws_secret_access_key: ${{ inputs.aws_secret_access_key }}
+        aws_session_token: ${{ inputs.aws_session_token }}
+        aws_region: ${{ inputs.aws_region }}
+        metadata_service_timeout: ${{ inputs.metadata_service_timeout }}
+        flags: ${{ inputs.flags }}
